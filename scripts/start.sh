@@ -33,5 +33,16 @@ fi
 # Change to container home directory
 cd /home/container
 
-# Execute the original entrypoint or passed command
-exec "$@"
+# Execute the startup command
+# Zephyr passes the command via STARTUP env variable, not as arguments
+if [ -n "$STARTUP" ]; then
+    # Replace template variables in STARTUP command
+    MODIFIED_STARTUP=$(echo "$STARTUP" | sed -e 's/{{/${/g' -e 's/}}/}/g')
+    echo "Starting: $MODIFIED_STARTUP"
+    exec /bin/bash -c "$MODIFIED_STARTUP"
+elif [ $# -gt 0 ]; then
+    exec "$@"
+else
+    echo "Error: No STARTUP command or arguments provided"
+    exit 1
+fi
