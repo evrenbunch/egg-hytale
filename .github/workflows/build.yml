@@ -8,6 +8,7 @@ on:
       - 'Assets.zip.part-*'
       - 'Dockerfile'
       - 'scripts/**'
+      - '.github/workflows/**'
     tags:
       - 'v*'
   pull_request:
