@@ -5,7 +5,7 @@ Official Hytale dedicated server Docker image with game files pre-installed.
 ## Usage
 
 ```bash
-docker pull ghcr.io/plex-host/hytale-server:java25
+docker pull ghcr.io/evrenbunch/hytale-server:java25
 ```
 
 ## Quick Start
@@ -14,7 +14,7 @@ docker pull ghcr.io/plex-host/hytale-server:java25
 docker run -d \
   -p 5520:5520/udp \
   -v ./data:/home/container \
-  ghcr.io/plex-host/hytale-server:java25 \
+  ghcr.io/evrenbunch/hytale-server:java25 \
   java -jar HytaleServer.jar --assets assets.zip --bind 0.0.0.0:5520
 ```
 
@@ -42,13 +42,13 @@ Due to large file sizes (3.7GB+), the Docker image must be built locally.
 
 - Docker Desktop running
 - Hytale account (for OAuth authentication)
-- GitHub account with write access to ghcr.io/plex-host
+- GitHub account with write access to ghcr.io/evrenbunch
 
 ### Steps
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/plex-host/egg-hytale.git
+   git clone https://github.com/evrenbunch/egg-hytale.git
    cd egg-hytale
    ```
 

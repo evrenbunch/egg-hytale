@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
-IMAGE_NAME="ghcr.io/plex-host/hytale-server"
+IMAGE_NAME="ghcr.io/evrenbunch/hytale-server"
 TAG="${1:-java25}"
 
 cd "$ROOT_DIR"
@@ -61,7 +61,7 @@ echo ""
 docker build \
     --tag "${IMAGE_NAME}:${TAG}" \
     --tag "${IMAGE_NAME}:latest" \
-    --label "org.opencontainers.image.source=https://github.com/plex-host/egg-hytale" \
+    --label "org.opencontainers.image.source=https://github.com/evrenbunch/egg-hytale" \
     --label "org.opencontainers.image.description=Hytale dedicated server with game files pre-installed" \
     .
 
