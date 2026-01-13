@@ -4,6 +4,16 @@
 
 set -e
 
+# Generate persistent machine-id for hardware UUID (needed for encrypted credential storage)
+# The machine-id is stored in the volume so it persists across container restarts
+MACHINE_ID_FILE="/home/container/.machine-id"
+if [ ! -f "$MACHINE_ID_FILE" ]; then
+    echo "=== Generating persistent machine-id ==="
+    # Generate a 32-character hex string (standard machine-id format)
+    cat /proc/sys/kernel/random/uuid | tr -d '-' > "$MACHINE_ID_FILE"
+    echo "Machine ID: $(cat $MACHINE_ID_FILE)"
+fi
+
 # Copy files if they don't exist in the working directory
 if [ ! -f /home/container/HytaleServer.jar ]; then
     echo "=== First run - copying Hytale server files ==="

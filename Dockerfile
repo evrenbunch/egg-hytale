@@ -20,6 +20,10 @@ RUN chmod -R 755 /hytale/Licenses
 # Copy entrypoint script
 COPY --chmod=755 scripts/start.sh /entrypoint.sh
 
+# Setup machine-id symlink for hardware UUID support
+# The actual machine-id will be generated in the volume by the entrypoint script
+RUN rm -f /etc/machine-id && ln -s /home/container/.machine-id /etc/machine-id
+
 ENV HYTALE_PREINSTALLED=true
 ENV HYTALE_VERSION=2026.01.13
 
