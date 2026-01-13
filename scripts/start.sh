@@ -33,6 +33,32 @@ fi
 # Change to container home directory
 cd /home/container
 
+# Update config.json with environment variables if set
+if [ -n "$MAX_PLAYERS" ]; then
+    if [ -f config.json ]; then
+        echo "Setting MaxPlayers to $MAX_PLAYERS"
+        # Use sed to update MaxPlayers in config.json
+        sed -i "s/\"MaxPlayers\": [0-9]*/\"MaxPlayers\": $MAX_PLAYERS/" config.json
+    else
+        echo "Creating config.json with MaxPlayers=$MAX_PLAYERS"
+        cat > config.json << EOF
+{
+  "Version": 3,
+  "ServerName": "Hytale Server",
+  "MOTD": "",
+  "Password": "",
+  "MaxPlayers": $MAX_PLAYERS,
+  "MaxViewRadius": 32,
+  "LocalCompressionEnabled": false,
+  "Defaults": {
+    "World": "default",
+    "GameMode": "Adventure"
+  }
+}
+EOF
+    fi
+fi
+
 # Execute the startup command
 # Zephyr passes the command via STARTUP env variable, not as arguments
 if [ -n "$STARTUP" ]; then
