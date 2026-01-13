@@ -1,0 +1,14 @@
+# Game files (download with ./scripts/download.sh)
+Assets.zip
+Assets.zip.part-*
+Server/HytaleServer.jar
+Server/HytaleServer.aot
+Server/Licenses/
+
+# Downloader files
+hytale-downloader*
+game.zip
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -34,30 +34,68 @@ This image is designed for game server hosting platforms. The installation scrip
 - `assets.zip` - Game assets (~3.5GB)
 - `Licenses/` - License files
 
-## Contributing
+## Building the Image
 
-### Updating Game Files
+Due to large file sizes (3.7GB+), the Docker image must be built locally.
+
+### Prerequisites
+
+- Docker Desktop running
+- Hytale account (for OAuth authentication)
+- GitHub account with write access to ghcr.io/plex-host
+
+### Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/plex-host/egg-hytale.git
+   cd egg-hytale
+   ```
+
+2. **Download Hytale game files**
+   ```bash
+   ./scripts/download.sh
+   ```
+   This will:
+   - Download the Hytale Downloader
+   - Prompt you to authenticate via OAuth
+   - Download and extract game files (~3.7GB)
+
+3. **Authenticate to GHCR**
+   ```bash
+   echo $GITHUB_TOKEN | docker login ghcr.io -u YOUR_USERNAME --password-stdin
+   ```
+
+4. **Build and push the image**
+   ```bash
+   ./scripts/build.sh
+   ```
+
+### Windows Users
+
+Use Git Bash or WSL to run the shell scripts:
+```bash
+# In Git Bash or WSL
+bash ./scripts/download.sh
+bash ./scripts/build.sh
+```
+
+## Updating Game Files
 
 When a new Hytale version is released:
 
-1. Fork this repository
-2. Download new game files using the Hytale Downloader:
-   ```bash
-   ./hytale-downloader -download-path game.zip
-   unzip game.zip
-   ```
-3. Replace the files in this repo:
-   - `Server/HytaleServer.jar`
-   - `Server/HytaleServer.aot`
-   - `Server/Licenses/`
-   - `Assets.zip`
-4. Update the version in the PR title (e.g., `Update to 2026.01.15`)
-5. Submit a Pull Request
+1. Run `./scripts/download.sh` to get new files
+2. Update `HYTALE_VERSION` in `Dockerfile`
+3. Run `./scripts/build.sh` to build and push
 
-### Requirements
+## Contributing
 
-- Git LFS (for Assets.zip)
-- Hytale account (for downloading game files)
+Community members can help by:
+1. Reporting when new Hytale versions are available
+2. Testing the Docker image
+3. Improving documentation
+
+Note: Game files cannot be committed to git due to size limits.
 
 ## License
 

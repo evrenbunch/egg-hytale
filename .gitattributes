@@ -1,3 +1,2 @@
-Assets.zip.part-* filter=lfs diff=lfs merge=lfs -text
-Server/HytaleServer.jar filter=lfs diff=lfs merge=lfs -text
-Server/HytaleServer.aot filter=lfs diff=lfs merge=lfs -text
+# Large game files are not stored in git
+# Download them using ./scripts/download.sh
