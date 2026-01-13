@@ -1,2 +1,3 @@
-# Large game files are not stored in git
-# Download them using ./scripts/download.sh
+# Force LF line endings for shell scripts
+*.sh text eol=lf
+Dockerfile text eol=lf
