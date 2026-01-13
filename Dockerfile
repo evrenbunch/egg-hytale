@@ -4,6 +4,9 @@ LABEL org.opencontainers.image.source="https://github.com/plex-host/hytale-serve
 LABEL org.opencontainers.image.description="Hytale dedicated server with game files pre-installed"
 LABEL org.opencontainers.image.licenses="MIT"
 
+# Create /hytale directory with proper permissions
+RUN mkdir -p /hytale && chmod 777 /hytale
+
 # Copy server files to /hytale (will be copied to volume on first run)
 COPY Server/HytaleServer.jar /hytale/HytaleServer.jar
 COPY Server/HytaleServer.aot /hytale/HytaleServer.aot
