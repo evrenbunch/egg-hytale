@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - 'Server/**'
-      - 'Assets.zip'
+      - 'Assets.zip.part-*'
       - 'Dockerfile'
       - 'scripts/**'
     tags:
@@ -39,9 +39,9 @@ jobs:
         run: |
           echo "Checking required files..."
           ls -la Server/
-          ls -la Assets.zip
+          ls -la Assets.zip.part-*
           echo "Server JAR size: $(du -h Server/HytaleServer.jar)"
-          echo "Assets size: $(du -h Assets.zip)"
+          echo "Assets parts size: $(du -ch Assets.zip.part-* | tail -1)"
 
       - name: Log in to GHCR
         if: github.event_name != 'pull_request'
